@@ -14,6 +14,8 @@ import (
 
 const statusMaxLength = 100
 
+var lastSong string
+
 type SlackClient struct {
 	apiToken, apiUrl, versionUid string
 	defaultEmoji, defaultText    string
@@ -61,7 +63,14 @@ func setCurrentSongStatus(slack *SlackClient, client *mpd.Client) error {
 		return err
 	}
 
-	return setStatus(slack, ":headphones:", attrs["Title"]+" - "+attrs["Artist"])
+	song := attrs["Title"] + " - " + attrs["Artist"]
+
+	if song == lastSong {
+		return nil
+	}
+	lastSong = song
+
+	return setStatus(slack, ":headphones:", song)
 }
 
 func resetStatus(slack *SlackClient) error {
