@@ -24,7 +24,7 @@ TS.boot_data.version_uid
 Then you should be able to run it like so,
 
 ```sh
-$ go get github.com/hawx/mpd-slack-status
+$ go get hawx.me/code/mpd-slack-status
 $ mpd-slack-status \
      --api-token 'xoxs-something-something' \
      --api-url 'https://my-team.slack.com/api/' \
